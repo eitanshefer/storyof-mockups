@@ -1,0 +1,1424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StoryOf — Your Story, Drawn to Life</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Montserrat:wght@300;400;500;600;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --dark-bg: #2C2418;
+  --dark-bg-deep: #231D13;
+  --gold: #C8A45C;
+  --gold-light: #D4B36E;
+  --cream: #F5E6C8;
+  --light-bg: #FDFAF5;
+  --warm-bg: #F5EFE4;
+  --brown: #3D2E1C;
+  --brown-light: #6B5A48;
+  --white: #FFFFFF;
+  --nav-height: 72px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--brown);
+  background: var(--dark-bg);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 { font-family: 'DM Serif Display', serif; font-weight: 400; line-height: 1.2; }
+
+a { text-decoration: none; color: inherit; }
+
+img { max-width: 100%; display: block; }
+
+/* Noise texture overlay mixin via pseudo-element */
+.noise-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.noise-bg > * { position: relative; z-index: 1; }
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-height);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 48px;
+  background: rgba(44, 36, 24, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s ease;
+}
+
+.nav.scrolled {
+  border-bottom-color: var(--gold);
+}
+
+.nav-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 26px;
+  color: var(--cream);
+  letter-spacing: 1px;
+}
+
+.nav-logo .story { font-weight: 800; }
+.nav-logo .of { font-weight: 300; }
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  color: var(--cream);
+  opacity: 0.8;
+  transition: opacity 0.3s, color 0.3s;
+}
+
+.nav-links a:hover { opacity: 1; color: var(--gold); }
+
+.nav-mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.nav-mobile-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--cream);
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+/* ============================================================
+   HERO (DARK)
+   ============================================================ */
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: var(--dark-bg);
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(44, 36, 24, 0.55) 0%,
+    rgba(44, 36, 24, 0.40) 50%,
+    rgba(44, 36, 24, 0.70) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 24px;
+}
+
+.hero-title {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(48px, 7vw, 96px);
+  color: var(--cream);
+  line-height: 1.05;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--gold);
+}
+
+.hero-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(14px, 1.6vw, 18px);
+  color: var(--cream);
+  opacity: 0.85;
+  margin-bottom: 40px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.8;
+}
+
+.btn-gold-outline {
+  display: inline-block;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1.5px solid var(--gold);
+  padding: 16px 48px;
+  border-radius: 2px;
+  transition: background 0.35s, color 0.35s, transform 0.25s;
+  cursor: pointer;
+}
+
+.btn-gold-outline:hover {
+  background: var(--gold);
+  color: var(--dark-bg);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   GRADIENT TRANSITIONS
+   ============================================================ */
+.gradient-dark-to-light {
+  height: 120px;
+  background: linear-gradient(to bottom, var(--dark-bg), var(--light-bg));
+}
+
+.gradient-light-to-dark {
+  height: 120px;
+  background: linear-gradient(to bottom, var(--light-bg), var(--dark-bg));
+}
+
+.gradient-warm-to-light {
+  height: 80px;
+  background: linear-gradient(to bottom, var(--warm-bg), var(--light-bg));
+}
+
+.gradient-light-to-warm {
+  height: 80px;
+  background: linear-gradient(to bottom, var(--light-bg), var(--warm-bg));
+}
+
+/* ============================================================
+   SECTION LABELS (same-tone dividers)
+   ============================================================ */
+.section-label {
+  text-align: center;
+  padding: 40px 0 8px;
+  position: relative;
+}
+
+.section-label span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: inherit;
+  padding: 0 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-label::before {
+  content: '';
+  position: absolute;
+  top: 56px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.25;
+}
+
+/* ============================================================
+   WHAT WE DO (LIGHT)
+   ============================================================ */
+.what-we-do {
+  background: var(--light-bg);
+  padding: 80px 0 60px;
+}
+
+.what-we-do-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.what-we-do .section-label { background: var(--light-bg); }
+.what-we-do .section-label span { background: var(--light-bg); }
+
+.what-we-do-heading {
+  font-size: clamp(32px, 4vw, 52px);
+  color: var(--brown);
+  text-align: center;
+  margin: 32px 0 56px;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.what-we-do-content {
+  position: relative;
+}
+
+.what-we-do-float-left {
+  float: left;
+  width: 340px;
+  margin: 0 36px 20px 0;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(61, 46, 28, 0.10);
+}
+
+.what-we-do-float-right {
+  float: right;
+  width: 280px;
+  margin: 12px 0 20px 36px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(61, 46, 28, 0.10);
+}
+
+.what-we-do-float-left img,
+.what-we-do-float-right img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.what-we-do-text {
+  font-size: 16px;
+  color: var(--brown-light);
+  line-height: 1.9;
+}
+
+.what-we-do-text p { margin-bottom: 20px; }
+
+.what-we-do-text p:first-of-type::first-letter {
+  font-family: 'DM Serif Display', serif;
+  font-size: 56px;
+  float: left;
+  line-height: 0.85;
+  margin-right: 8px;
+  margin-top: 4px;
+  color: var(--gold);
+}
+
+.clearfix::after { content: ''; display: table; clear: both; }
+
+/* ============================================================
+   HOW IT WORKS (LIGHT) — TIMELINE
+   ============================================================ */
+.how-it-works {
+  background: var(--light-bg);
+  padding: 40px 0 100px;
+}
+
+.how-it-works .section-label { background: var(--light-bg); }
+.how-it-works .section-label span { background: var(--light-bg); }
+
+.how-it-works-heading {
+  font-size: clamp(32px, 4vw, 48px);
+  color: var(--brown);
+  text-align: center;
+  margin: 32px 0 64px;
+}
+
+.timeline {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 48px;
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 80px;
+  left: calc(48px + 60px);
+  right: calc(48px + 60px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+  opacity: 0.4;
+  z-index: 0;
+}
+
+.timeline-step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 0 16px;
+}
+
+.timeline-img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 20px;
+  border: 3px solid var(--gold);
+  box-shadow: 0 4px 20px rgba(200, 164, 92, 0.15);
+}
+
+.timeline-node {
+  width: 16px;
+  height: 16px;
+  background: var(--gold);
+  border-radius: 50%;
+  margin: 0 auto 24px;
+  box-shadow: 0 0 0 6px rgba(200, 164, 92, 0.15);
+}
+
+.timeline-step h3 {
+  font-size: 22px;
+  color: var(--brown);
+  margin-bottom: 12px;
+}
+
+.timeline-step p {
+  font-size: 14px;
+  color: var(--brown-light);
+  max-width: 240px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   PORTFOLIO (DARK)
+   ============================================================ */
+.portfolio {
+  background: var(--dark-bg);
+  padding: 80px 0;
+  position: relative;
+}
+
+.portfolio.noise-bg::before { opacity: 0.03; }
+
+.portfolio .section-label span { color: var(--gold); background: var(--dark-bg); }
+.portfolio .section-label::before { background: var(--gold); }
+
+.portfolio-heading {
+  font-size: clamp(32px, 4vw, 52px);
+  color: var(--cream);
+  text-align: center;
+  margin: 32px 0 56px;
+}
+
+.portfolio-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+/* Featured item */
+.portfolio-featured {
+  display: grid;
+  grid-template-columns: 60% 40%;
+  border-radius: 2px;
+  overflow: hidden;
+  background: var(--dark-bg-deep);
+  margin-bottom: 24px;
+  border: 1px solid rgba(200, 164, 92, 0.12);
+}
+
+.portfolio-featured-img {
+  position: relative;
+  overflow: hidden;
+  min-height: 360px;
+}
+
+.portfolio-featured-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.portfolio-featured-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 48px 40px;
+}
+
+.portfolio-tag {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+}
+
+.portfolio-featured-info h3 {
+  font-size: 32px;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.portfolio-featured-info .subtitle {
+  font-family: 'DM Serif Display', serif;
+  font-size: 16px;
+  font-style: italic;
+  color: var(--gold);
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+.portfolio-featured-info p {
+  font-size: 14px;
+  color: var(--cream);
+  opacity: 0.7;
+  line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.play-btn:hover { opacity: 0.8; }
+
+.play-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.play-icon:hover {
+  background: rgba(200, 164, 92, 0.15);
+  transform: scale(1.05);
+}
+
+.play-icon svg { margin-left: 3px; }
+
+/* Portfolio grid */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.portfolio-card {
+  background: var(--dark-bg-deep);
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid rgba(200, 164, 92, 0.08);
+  transition: border-color 0.3s, transform 0.3s;
+}
+
+.portfolio-card:hover {
+  border-color: rgba(200, 164, 92, 0.25);
+  transform: translateY(-4px);
+}
+
+.portfolio-card-img {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+}
+
+.portfolio-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.portfolio-card:hover .portfolio-card-img img {
+  transform: scale(1.04);
+}
+
+.portfolio-card-play {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(44, 36, 24, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.portfolio-card:hover .portfolio-card-play { opacity: 1; }
+
+.portfolio-card-play .play-icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(44, 36, 24, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.portfolio-card-body {
+  padding: 20px 22px;
+}
+
+.portfolio-card-body h4 {
+  font-size: 18px;
+  color: var(--cream);
+  margin-bottom: 4px;
+}
+
+.portfolio-card-body .subtitle {
+  font-family: 'DM Serif Display', serif;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+/* ============================================================
+   OCCASIONS (LIGHT) — HORIZONTAL SCROLL
+   ============================================================ */
+.occasions {
+  background: var(--light-bg);
+  padding: 80px 0 100px;
+}
+
+.occasions .section-label { background: var(--light-bg); }
+.occasions .section-label span { background: var(--light-bg); }
+
+.occasions-heading {
+  font-size: clamp(32px, 4vw, 48px);
+  color: var(--brown);
+  text-align: center;
+  margin: 32px 0 16px;
+}
+
+.occasions-sub {
+  text-align: center;
+  font-size: 15px;
+  color: var(--brown-light);
+  margin-bottom: 48px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 24px;
+}
+
+.occasions-scroll {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 48px 24px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold) transparent;
+}
+
+.occasions-scroll::-webkit-scrollbar { height: 6px; }
+.occasions-scroll::-webkit-scrollbar-track { background: transparent; }
+.occasions-scroll::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+.occasion-card {
+  flex: 0 0 240px;
+  scroll-snap-align: start;
+  background: var(--white);
+  border-radius: 16px;
+  padding: 36px 28px;
+  text-align: center;
+  box-shadow: 0 4px 24px rgba(61, 46, 28, 0.06);
+  border: 1px solid rgba(200, 164, 92, 0.12);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: default;
+}
+
+.occasion-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 36px rgba(61, 46, 28, 0.12);
+}
+
+.occasion-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.occasion-card h4 {
+  font-size: 20px;
+  color: var(--brown);
+  margin-bottom: 8px;
+}
+
+.occasion-card p {
+  font-size: 13px;
+  color: var(--brown-light);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   TESTIMONIALS (WARM LIGHT)
+   ============================================================ */
+.testimonials {
+  background: var(--warm-bg);
+  padding: 80px 0 100px;
+}
+
+.testimonials .section-label { background: var(--warm-bg); }
+.testimonials .section-label span { background: var(--warm-bg); }
+
+.testimonials-heading {
+  font-size: clamp(32px, 4vw, 48px);
+  color: var(--brown);
+  text-align: center;
+  margin: 32px 0 56px;
+}
+
+.testimonials-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: stretch;
+}
+
+.testimonial-featured {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 8px 32px rgba(61, 46, 28, 0.08);
+  border: 1px solid rgba(200, 164, 92, 0.10);
+}
+
+.testimonial-featured .quote-mark {
+  font-family: 'DM Serif Display', serif;
+  font-size: 72px;
+  color: var(--gold);
+  line-height: 0.6;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.testimonial-featured blockquote {
+  font-family: 'DM Serif Display', serif;
+  font-size: 20px;
+  color: var(--brown);
+  line-height: 1.7;
+  font-style: italic;
+  margin-bottom: 28px;
+}
+
+.testimonial-author {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 1px;
+}
+
+.testimonials-side {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.testimonial-small {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 32px;
+  flex: 1;
+  box-shadow: 0 4px 20px rgba(61, 46, 28, 0.06);
+  border: 1px solid rgba(200, 164, 92, 0.08);
+}
+
+.testimonial-small .quote-mark {
+  font-family: 'DM Serif Display', serif;
+  font-size: 48px;
+  color: var(--gold);
+  line-height: 0.6;
+  margin-bottom: 12px;
+  opacity: 0.4;
+}
+
+.testimonial-small blockquote {
+  font-size: 14px;
+  color: var(--brown);
+  line-height: 1.75;
+  margin-bottom: 16px;
+}
+
+/* ============================================================
+   CREDENTIALS (LIGHT)
+   ============================================================ */
+.credentials {
+  background: var(--light-bg);
+  padding: 60px 0;
+}
+
+.credentials-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 48px;
+  text-align: center;
+}
+
+.credentials-inner img {
+  width: 100%;
+  height: auto;
+  filter: grayscale(100%);
+  opacity: 0.5;
+  transition: opacity 0.4s, filter 0.4s;
+}
+
+.credentials-inner img:hover {
+  filter: grayscale(60%);
+  opacity: 0.7;
+}
+
+/* ============================================================
+   ABOUT (LIGHT)
+   ============================================================ */
+.about {
+  background: var(--light-bg);
+  padding: 60px 0 100px;
+}
+
+.about .section-label { background: var(--light-bg); }
+.about .section-label span { background: var(--light-bg); }
+
+.about-heading {
+  font-size: clamp(32px, 4vw, 48px);
+  color: var(--brown);
+  text-align: center;
+  margin: 32px 0 56px;
+}
+
+.about-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: start;
+}
+
+.about-text p {
+  font-size: 16px;
+  color: var(--brown-light);
+  line-height: 1.9;
+  margin-bottom: 20px;
+}
+
+.founder-quote {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 40px 36px;
+  border-left: 4px solid var(--gold);
+  box-shadow: 0 8px 32px rgba(61, 46, 28, 0.06);
+}
+
+.founder-quote blockquote {
+  font-family: 'DM Serif Display', serif;
+  font-size: 17px;
+  font-style: italic;
+  color: var(--brown);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.founder-quote cite {
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  font-style: normal;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+
+/* ============================================================
+   CTA (DARK)
+   ============================================================ */
+.cta-section {
+  background: var(--dark-bg);
+  padding: 120px 48px;
+  text-align: center;
+  position: relative;
+}
+
+.cta-section.noise-bg::before { opacity: 0.04; }
+
+.cta-heading {
+  font-size: clamp(36px, 5vw, 60px);
+  color: var(--cream);
+  margin-bottom: 16px;
+}
+
+.cta-sub {
+  font-size: 16px;
+  color: var(--cream);
+  opacity: 0.65;
+  margin-bottom: 44px;
+  font-weight: 300;
+}
+
+/* ============================================================
+   FOOTER (DARK)
+   ============================================================ */
+.footer {
+  background: var(--dark-bg-deep);
+  padding: 56px 48px 40px;
+  position: relative;
+}
+
+.footer.noise-bg::before { opacity: 0.03; }
+
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+.footer-logo {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 24px;
+  color: var(--cream);
+}
+
+.footer-logo .story { font-weight: 800; }
+.footer-logo .of { font-weight: 300; }
+
+.footer-tagline {
+  font-size: 13px;
+  color: var(--cream);
+  opacity: 0.5;
+  margin-top: 8px;
+  font-weight: 300;
+}
+
+.footer-links {
+  display: flex;
+  gap: 28px;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  font-size: 13px;
+  color: var(--cream);
+  opacity: 0.6;
+  letter-spacing: 1px;
+  transition: opacity 0.3s, color 0.3s;
+}
+
+.footer-links a:hover { opacity: 1; color: var(--gold); }
+
+.footer-email {
+  font-size: 14px;
+  color: var(--gold);
+  letter-spacing: 0.5px;
+}
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 40px auto 0;
+  padding-top: 24px;
+  border-top: 1px solid rgba(200, 164, 92, 0.12);
+  text-align: center;
+  font-size: 12px;
+  color: var(--cream);
+  opacity: 0.35;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .nav-links.open {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: var(--nav-height);
+    left: 0; right: 0;
+    background: rgba(44, 36, 24, 0.97);
+    padding: 24px;
+    gap: 20px;
+  }
+  .nav-mobile-toggle { display: flex; }
+
+  .hero-title { font-size: clamp(36px, 10vw, 56px); }
+
+  .what-we-do-inner { padding: 0 24px; }
+  .what-we-do-float-left,
+  .what-we-do-float-right {
+    float: none;
+    width: 100%;
+    margin: 0 0 24px 0;
+  }
+
+  .timeline {
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    padding: 0 24px;
+  }
+  .timeline-line {
+    display: none;
+  }
+
+  .portfolio-inner { padding: 0 24px; }
+  .portfolio-featured {
+    grid-template-columns: 1fr;
+  }
+  .portfolio-featured-img { min-height: 240px; }
+  .portfolio-featured-info { padding: 32px 24px; }
+
+  .portfolio-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .occasions-scroll {
+    flex-direction: column;
+    overflow-x: visible;
+    padding: 0 24px;
+  }
+  .occasion-card { flex: none; width: 100%; }
+
+  .testimonials-inner { padding: 0 24px; }
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .credentials-inner { padding: 0 24px; }
+
+  .about-inner { padding: 0 24px; }
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .cta-section { padding: 80px 24px; }
+
+  .footer { padding: 40px 24px 32px; }
+  .footer-inner {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer-links { justify-content: center; }
+}
+
+/* ============================================================
+   SCROLL ANIMATIONS
+   ============================================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-delay-1 { transition-delay: 0.1s; }
+.fade-in-delay-2 { transition-delay: 0.2s; }
+.fade-in-delay-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- ======================== NAV ======================== -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-logo"><span class="story">Story</span><span class="of">Of</span></a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#what-we-do">About</a></li>
+    <li><a href="#how-it-works">Process</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#occasions">Occasions</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#cta">Contact</a></li>
+  </ul>
+  <button class="nav-mobile-toggle" id="navToggle" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ======================== HERO (DARK) ======================== -->
+<section class="hero" id="hero">
+  <video class="hero-video" autoplay muted loop playsinline poster="assets/studio/hero-poster.jpg">
+    <source src="https://video.wixstatic.com/video/c0bde0_6be8e3d2df524a89a562876f20bd24cb/720p/mp4/file.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title">Your Story<br><em>Drawn to Life</em></h1>
+    <p class="hero-subtitle">Personalized animated films that celebrate your most meaningful moments, crafted with artistry and heart.</p>
+    <a href="#cta" class="btn-gold-outline">Start Your Story</a>
+  </div>
+</section>
+
+<!-- ======================== GRADIENT: dark → light ======================== -->
+<div class="gradient-dark-to-light"></div>
+
+<!-- ======================== WHAT WE DO (LIGHT) ======================== -->
+<section class="what-we-do" id="what-we-do">
+  <div class="what-we-do-inner">
+    <div class="section-label"><span>What We Do</span></div>
+    <h2 class="what-we-do-heading fade-in">Personal Stories Brought to Life Through Animation</h2>
+    <div class="what-we-do-content clearfix fade-in">
+      <div class="what-we-do-float-left">
+        <img src="assets/studio/grandma.jpg" alt="Grandmother's story brought to life through animation">
+      </div>
+      <div class="what-we-do-float-right">
+        <img src="assets/studio/bride-and-groom.png" alt="Animated wedding film">
+      </div>
+      <div class="what-we-do-text">
+        <p>Every family has a story worth telling. At StoryOf, we transform your most cherished memories and personal narratives into beautifully crafted animated films. Whether it is a grandmother's journey through history, a couple's love story, or a tribute to someone you have lost, we create timeless keepsakes that preserve what matters most.</p>
+        <p>Our studio combines cutting-edge animation techniques with deeply personal storytelling. We sit with you, listen to your stories, and weave them into cinematic experiences that move audiences to laughter, tears, and everything in between. Each film is a one-of-a-kind work of art, tailored entirely to your narrative.</p>
+        <p>From intimate family screenings to grand event premieres, a StoryOf film becomes the centerpiece of your celebration, a gift that grows more precious with time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== HOW IT WORKS (LIGHT) — SEPARATOR ======================== -->
+<section class="how-it-works" id="how-it-works">
+  <div class="section-label" style="background: var(--light-bg);"><span style="background: var(--light-bg);">How It Works</span></div>
+  <h2 class="how-it-works-heading fade-in">Three Simple Steps</h2>
+  <div class="timeline">
+    <div class="timeline-line"></div>
+    <div class="timeline-step fade-in fade-in-delay-1">
+      <img class="timeline-img" src="assets/studio/step-listen.jpg" alt="We listen to your story">
+      <div class="timeline-node"></div>
+      <h3>We Listen</h3>
+      <p>We sit down with you and your loved ones, capturing the stories, memories, and emotions that make your journey unique.</p>
+    </div>
+    <div class="timeline-step fade-in fade-in-delay-2">
+      <img class="timeline-img" src="assets/studio/step-create.jpeg" alt="We create your animated film">
+      <div class="timeline-node"></div>
+      <h3>We Create</h3>
+      <p>Our artists and animators transform your narrative into a beautifully crafted animated film, frame by frame.</p>
+    </div>
+    <div class="timeline-step fade-in fade-in-delay-3">
+      <img class="timeline-img" src="assets/studio/step-celebrate.jpeg" alt="You celebrate with your film">
+      <div class="timeline-node"></div>
+      <h3>You Celebrate</h3>
+      <p>Screen your film at your event, share it with family, and treasure a keepsake that lasts for generations.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== GRADIENT: light → dark ======================== -->
+<div class="gradient-light-to-dark"></div>
+
+<!-- ======================== PORTFOLIO (DARK) ======================== -->
+<section class="portfolio noise-bg" id="portfolio">
+  <div class="section-label"><span>Portfolio</span></div>
+  <h2 class="portfolio-heading fade-in">Stories We Have Told</h2>
+  <div class="portfolio-inner">
+    <!-- Featured item -->
+    <div class="portfolio-featured fade-in">
+      <div class="portfolio-featured-img">
+        <img src="assets/studio/portfolio-dov.png" alt="Dov — In memory of my father">
+      </div>
+      <div class="portfolio-featured-info">
+        <div class="portfolio-tag">Featured Film</div>
+        <h3>Dov</h3>
+        <div class="subtitle">In Memory of My Father</div>
+        <p>A deeply moving tribute that brings a father's extraordinary life story to the screen through hand-crafted animation, preserving his legacy for generations to come.</p>
+        <div class="play-btn">
+          <div class="play-icon">
+            <svg width="16" height="18" viewBox="0 0 16 18" fill="none"><polygon points="2,1 14,9 2,17" fill="none" stroke="#C8A45C" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+          Watch Film
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid items -->
+    <div class="portfolio-grid">
+      <div class="portfolio-card fade-in fade-in-delay-1">
+        <div class="portfolio-card-img">
+          <img src="assets/studio/portfolio-ola-tim.jpg" alt="Ola & Tim — Still not a wedding">
+          <div class="portfolio-card-play">
+            <div class="play-icon">
+              <svg width="16" height="18" viewBox="0 0 16 18" fill="none"><polygon points="2,1 14,9 2,17" fill="none" stroke="#C8A45C" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-card-body">
+          <h4>Ola &amp; Tim</h4>
+          <div class="subtitle">Still Not a Wedding</div>
+        </div>
+      </div>
+      <div class="portfolio-card fade-in fade-in-delay-2">
+        <div class="portfolio-card-img">
+          <img src="assets/studio/portfolio-german-nurse.png" alt="The German Nurse — Elka Burnstein">
+          <div class="portfolio-card-play">
+            <div class="play-icon">
+              <svg width="16" height="18" viewBox="0 0 16 18" fill="none"><polygon points="2,1 14,9 2,17" fill="none" stroke="#C8A45C" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-card-body">
+          <h4>The German Nurse</h4>
+          <div class="subtitle">Elka Burnstein</div>
+        </div>
+      </div>
+      <div class="portfolio-card fade-in fade-in-delay-3">
+        <div class="portfolio-card-img">
+          <img src="assets/studio/portfolio-zippora.jpg" alt="Red Fox — Zippora Feivlewitz">
+          <div class="portfolio-card-play">
+            <div class="play-icon">
+              <svg width="16" height="18" viewBox="0 0 16 18" fill="none"><polygon points="2,1 14,9 2,17" fill="none" stroke="#C8A45C" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-card-body">
+          <h4>Red Fox</h4>
+          <div class="subtitle">Zippora Feivlewitz</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== GRADIENT: dark → light ======================== -->
+<div class="gradient-dark-to-light"></div>
+
+<!-- ======================== OCCASIONS (LIGHT) ======================== -->
+<section class="occasions" id="occasions">
+  <div class="section-label"><span>Occasions</span></div>
+  <h2 class="occasions-heading fade-in">Every Milestone Deserves a Film</h2>
+  <p class="occasions-sub fade-in">We create animated films for life's most meaningful moments.</p>
+  <div class="occasions-scroll">
+    <div class="occasion-card fade-in">
+      <span class="occasion-icon" aria-hidden="true">&#128141;</span>
+      <h4>Weddings</h4>
+      <p>Tell your love story in a way no wedding video ever could.</p>
+    </div>
+    <div class="occasion-card fade-in fade-in-delay-1">
+      <span class="occasion-icon" aria-hidden="true">&#10084;&#65039;</span>
+      <h4>Anniversaries</h4>
+      <p>Celebrate the journey you have shared together, year after year.</p>
+    </div>
+    <div class="occasion-card fade-in fade-in-delay-1">
+      <span class="occasion-icon" aria-hidden="true">&#127874;</span>
+      <h4>A Special Birthday</h4>
+      <p>Honor a milestone birthday with a film as unique as the person.</p>
+    </div>
+    <div class="occasion-card fade-in fade-in-delay-2">
+      <span class="occasion-icon" aria-hidden="true">&#127775;</span>
+      <h4>Coming of Age</h4>
+      <p>Mark the transition into adulthood with a story they will treasure.</p>
+    </div>
+    <div class="occasion-card fade-in fade-in-delay-2">
+      <span class="occasion-icon" aria-hidden="true">&#128118;</span>
+      <h4>A New Baby</h4>
+      <p>Welcome the newest family member with an animated tale of their arrival.</p>
+    </div>
+    <div class="occasion-card fade-in fade-in-delay-3">
+      <span class="occasion-icon" aria-hidden="true">&#128367;&#65039;</span>
+      <h4>In Memory Of</h4>
+      <p>Preserve a loved one's legacy in an animated tribute that endures.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== GRADIENT: light → warm ======================== -->
+<div class="gradient-light-to-warm"></div>
+
+<!-- ======================== TESTIMONIALS (WARM) ======================== -->
+<section class="testimonials" id="testimonials">
+  <div class="section-label"><span>Testimonials</span></div>
+  <h2 class="testimonials-heading fade-in">What Our Clients Say</h2>
+  <div class="testimonials-inner">
+    <div class="testimonials-grid">
+      <div class="testimonial-featured fade-in">
+        <div class="quote-mark">&ldquo;</div>
+        <blockquote>My 90 years old mother, WWII survivor, was animated by StoryOf. This memoir preserves her legacy, and inspires generations of young and adult audiences.</blockquote>
+        <div class="testimonial-author">Dina Smat</div>
+      </div>
+      <div class="testimonials-side">
+        <div class="testimonial-small fade-in fade-in-delay-1">
+          <div class="quote-mark">&ldquo;</div>
+          <blockquote>I had no idea what treasured memories my mother and uncle held of my father. We feel so much closer to each other now, and we have an amazing film as a tribute of his memory.</blockquote>
+          <div class="testimonial-author">Merav Kaplan</div>
+        </div>
+        <div class="testimonial-small fade-in fade-in-delay-2">
+          <div class="quote-mark">&ldquo;</div>
+          <blockquote>The StoryOf film we received as a 15th anniversary gift is by far our favorite. When it was screened at our event everyone enjoyed it.</blockquote>
+          <div class="testimonial-author">Ola &amp; Tim</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== GRADIENT: warm → light ======================== -->
+<div class="gradient-warm-to-light"></div>
+
+<!-- ======================== CREDENTIALS (LIGHT) ======================== -->
+<section class="credentials">
+  <div class="credentials-inner fade-in">
+    <img src="assets/studio/credentials-strip.png" alt="Awards and credentials">
+  </div>
+</section>
+
+<!-- ======================== ABOUT (LIGHT) ======================== -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="section-label"><span>About</span></div>
+    <h2 class="about-heading fade-in">The Studio Behind the Stories</h2>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>We bring personal journeys to life through cutting-edge animation techniques. Our team celebrates the magic in everyday experiences, revives moments lost to time, and strengthens the bonds that tie us all together.</p>
+        <p>With over 15 years of experience in the international creative industry, we've crafted award-winning animated stories that have captivated global audiences.</p>
+      </div>
+      <div class="founder-quote fade-in fade-in-delay-1">
+        <blockquote>&ldquo;I founded StoryOf to bring people together through creativity. Our stories connect us to our roots and to one another, and make this world a bit brighter. When we're creating a film, we don't just save the memories: we're building bridges between hearts.&rdquo;</blockquote>
+        <cite>Daniella Koffler, Founder &amp; CEO</cite>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== GRADIENT: light → dark ======================== -->
+<div class="gradient-light-to-dark"></div>
+
+<!-- ======================== CTA (DARK) ======================== -->
+<section class="cta-section noise-bg" id="cta">
+  <h2 class="cta-heading fade-in">Ready to Begin?</h2>
+  <p class="cta-sub fade-in">Let us turn your story into a timeless animated film.</p>
+  <a href="mailto:hello@storyof.co" class="btn-gold-outline fade-in">Get in Touch</a>
+</section>
+
+<!-- ======================== FOOTER (DARK) ======================== -->
+<footer class="footer noise-bg">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo"><span class="story">Story</span><span class="of">Of</span></div>
+      <p class="footer-tagline">Your story, drawn to life.</p>
+    </div>
+    <ul class="footer-links">
+      <li><a href="#what-we-do">About</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#occasions">Occasions</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+    </ul>
+    <a href="mailto:hello@storyof.co" class="footer-email">hello@storyof.co</a>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2026 StoryOf. All rights reserved.
+  </div>
+</footer>
+
+<!-- ======================== SCRIPTS ======================== -->
+<script>
+// Nav scroll effect
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Mobile nav toggle
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+});
+
+// Close mobile nav on link click
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+  });
+});
+
+// Scroll fade-in observer
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

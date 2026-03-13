@@ -1,0 +1,1118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StoryOf — Your Story, Drawn to Life</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=Montserrat:wght@300;800&display=swap" rel="stylesheet">
+    <style>
+        /* ── Reset & Base ── */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #2C2418;
+            --bg-dark: #1E1810;
+            --bg-card: #362D22;
+            --gold: #C8A45C;
+            --gold-dim: rgba(200, 164, 92, 0.3);
+            --cream: #F5E6C8;
+            --cream-dim: rgba(245, 230, 200, 0.6);
+            --white: #FFF8EE;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--cream);
+            line-height: 1.7;
+            font-weight: 300;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* SVG noise overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            background-repeat: repeat;
+            background-size: 256px 256px;
+        }
+
+        img { display: block; max-width: 100%; }
+        a { color: inherit; text-decoration: none; }
+        button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+        /* ── Typography ── */
+        h1, h2, h3 { font-family: 'DM Serif Display', serif; font-weight: 400; line-height: 1.1; }
+
+        .section-pad { padding: 160px 0; }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        .container--wide {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 60px;
+        }
+
+        /* ── Section Divider ── */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            padding: 0 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--gold-dim);
+        }
+
+        .divider span {
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            white-space: nowrap;
+            font-weight: 500;
+        }
+
+        /* ══════════════════════════════════════
+           NAV
+           ══════════════════════════════════════ */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 0 60px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(30, 24, 16, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(200, 164, 92, 0.1);
+        }
+
+        .nav__logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.4rem;
+            color: var(--cream);
+            letter-spacing: 0.02em;
+        }
+        .nav__logo span:first-child { font-weight: 800; }
+        .nav__logo span:last-child { font-weight: 300; }
+
+        .nav__links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav__links a {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--cream-dim);
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        .nav__links a:hover { color: var(--gold); }
+
+        .nav__menu {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+        .nav__menu span {
+            width: 24px;
+            height: 1px;
+            background: var(--cream);
+            transition: 0.3s;
+        }
+
+        /* ══════════════════════════════════════
+           HERO
+           ══════════════════════════════════════ */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+        }
+
+        .hero__video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to top,
+                rgba(44, 36, 24, 1) 0%,
+                rgba(44, 36, 24, 0.7) 30%,
+                rgba(44, 36, 24, 0.3) 60%,
+                rgba(44, 36, 24, 0.15) 100%
+            );
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 2;
+            padding: 0 60px 120px;
+            max-width: 900px;
+        }
+
+        .hero__headline {
+            font-size: 7rem;
+            color: var(--white);
+            margin-bottom: 28px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero__headline em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .hero__sub {
+            font-size: 1.15rem;
+            color: var(--cream-dim);
+            max-width: 520px;
+            margin-bottom: 48px;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 16px 48px;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-weight: 500;
+            transition: all 0.4s;
+            border-radius: 2px;
+        }
+
+        .btn:hover {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .btn--filled {
+            background: var(--gold);
+            color: var(--bg);
+        }
+
+        .btn--filled:hover {
+            background: transparent;
+            color: var(--gold);
+        }
+
+        /* ══════════════════════════════════════
+           WHAT WE DO
+           ══════════════════════════════════════ */
+        .whatwedo {
+            padding: 160px 0;
+        }
+
+        .whatwedo__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .whatwedo__images {
+            position: relative;
+            height: 640px;
+        }
+
+        .whatwedo__img1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 70%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 3px;
+            border: 1px solid var(--gold-dim);
+        }
+
+        .whatwedo__img2 {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 65%;
+            height: 360px;
+            object-fit: cover;
+            border-radius: 3px;
+            border: 1px solid var(--gold-dim);
+        }
+
+        .whatwedo__text h2 {
+            font-size: 3.8rem;
+            color: var(--white);
+            margin-bottom: 40px;
+            letter-spacing: -0.01em;
+        }
+
+        .whatwedo__text p {
+            font-size: 1.05rem;
+            color: var(--cream-dim);
+            margin-bottom: 20px;
+            max-width: 480px;
+        }
+
+        .whatwedo__text .gold-line {
+            width: 60px;
+            height: 1px;
+            background: var(--gold);
+            margin-bottom: 32px;
+        }
+
+        /* ══════════════════════════════════════
+           HOW IT WORKS
+           ══════════════════════════════════════ */
+        .howitworks {
+            padding: 160px 0;
+            background: var(--bg-dark);
+        }
+
+        .howitworks__header {
+            margin-bottom: 100px;
+        }
+
+        .howitworks__header h2 {
+            font-size: 3.8rem;
+            color: var(--white);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+        }
+
+        .step__number {
+            font-family: 'DM Serif Display', serif;
+            font-size: 5rem;
+            color: var(--gold-dim);
+            line-height: 1;
+            margin-bottom: 32px;
+        }
+
+        .step__image {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 3px;
+            margin-bottom: 32px;
+            border: 1px solid var(--gold-dim);
+            transition: border-color 0.4s;
+        }
+
+        .step:hover .step__image { border-color: var(--gold); }
+
+        .step__title {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 16px;
+            font-family: 'DM Serif Display', serif;
+        }
+
+        .step__desc {
+            font-size: 0.95rem;
+            color: var(--cream-dim);
+            line-height: 1.7;
+        }
+
+        /* ══════════════════════════════════════
+           PORTFOLIO
+           ══════════════════════════════════════ */
+        .portfolio {
+            padding: 160px 0;
+        }
+
+        .portfolio__header {
+            margin-bottom: 80px;
+        }
+
+        .portfolio__header h2 {
+            font-size: 3.8rem;
+            color: var(--white);
+        }
+
+        .portfolio__grid {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            grid-template-rows: auto auto;
+            gap: 32px;
+        }
+
+        .portfolio__item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 3px;
+            border: 1px solid transparent;
+            transition: border-color 0.4s;
+            cursor: pointer;
+        }
+
+        .portfolio__item:hover {
+            border-color: var(--gold);
+        }
+
+        .portfolio__item--large {
+            grid-row: span 2;
+        }
+
+        .portfolio__item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .portfolio__item:hover img { transform: scale(1.03); }
+
+        .portfolio__overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(30, 24, 16, 0.95) 0%, rgba(30, 24, 16, 0.1) 60%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 36px;
+            transition: background 0.4s;
+        }
+
+        .portfolio__play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 64px;
+            height: 64px;
+            border: 2px solid rgba(200, 164, 92, 0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s;
+        }
+
+        .portfolio__item:hover .portfolio__play {
+            border-color: var(--gold);
+            background: rgba(200, 164, 92, 0.15);
+        }
+
+        .portfolio__play svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--gold);
+            margin-left: 3px;
+        }
+
+        .portfolio__title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .portfolio__desc {
+            font-size: 0.85rem;
+            color: var(--cream-dim);
+            margin-bottom: 12px;
+        }
+
+        .portfolio__tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .portfolio__tag {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gold);
+            border: 1px solid var(--gold-dim);
+            padding: 4px 12px;
+            border-radius: 2px;
+            font-weight: 500;
+        }
+
+        /* ══════════════════════════════════════
+           OCCASIONS
+           ══════════════════════════════════════ */
+        .occasions {
+            padding: 160px 0;
+            background: var(--bg-dark);
+        }
+
+        .occasions__header {
+            margin-bottom: 80px;
+        }
+
+        .occasions__header h2 {
+            font-size: 3.8rem;
+            color: var(--white);
+        }
+
+        .occasions__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .occasion {
+            padding: 48px 36px;
+            border: 1px solid var(--gold-dim);
+            border-radius: 3px;
+            transition: all 0.4s;
+            cursor: default;
+        }
+
+        .occasion:hover {
+            border-color: var(--gold);
+            background: rgba(200, 164, 92, 0.04);
+        }
+
+        .occasion__title {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.4rem;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .occasion__sub {
+            font-size: 0.8rem;
+            color: var(--gold);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        /* ══════════════════════════════════════
+           TESTIMONIALS
+           ══════════════════════════════════════ */
+        .testimonials {
+            padding: 160px 0;
+        }
+
+        .testimonials__header {
+            margin-bottom: 100px;
+        }
+
+        .testimonials__header h2 {
+            font-size: 3.8rem;
+            color: var(--white);
+        }
+
+        .testimonials__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+        }
+
+        .testimonial {
+            position: relative;
+            padding-top: 40px;
+        }
+
+        .testimonial::before {
+            content: '\201C';
+            font-family: 'DM Serif Display', serif;
+            font-size: 6rem;
+            color: var(--gold-dim);
+            position: absolute;
+            top: -20px;
+            left: 0;
+            line-height: 1;
+        }
+
+        .testimonial__quote {
+            font-size: 1.05rem;
+            color: var(--cream);
+            line-height: 1.8;
+            margin-bottom: 32px;
+            font-style: italic;
+        }
+
+        .testimonial__author {
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        /* ══════════════════════════════════════
+           CREDENTIALS
+           ══════════════════════════════════════ */
+        .credentials {
+            padding: 100px 0;
+            background: var(--bg-dark);
+        }
+
+        .credentials__strip {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+            display: block;
+            opacity: 0.55;
+            filter: brightness(1.5) grayscale(0.3);
+            transition: opacity 0.4s;
+        }
+
+        .credentials__strip:hover { opacity: 0.8; }
+
+        /* ══════════════════════════════════════
+           ABOUT
+           ══════════════════════════════════════ */
+        .about {
+            padding: 160px 0;
+        }
+
+        .about__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 100px;
+            align-items: start;
+        }
+
+        .about__text h2 {
+            font-size: 3.8rem;
+            color: var(--white);
+            margin-bottom: 40px;
+        }
+
+        .about__text p {
+            font-size: 1.05rem;
+            color: var(--cream-dim);
+            margin-bottom: 24px;
+            line-height: 1.8;
+        }
+
+        .about__quote {
+            border-left: 2px solid var(--gold);
+            padding-left: 40px;
+            padding-top: 20px;
+        }
+
+        .about__quote blockquote {
+            font-family: 'DM Serif Display', serif;
+            font-size: 1.5rem;
+            color: var(--cream);
+            line-height: 1.6;
+            font-style: italic;
+            margin-bottom: 32px;
+        }
+
+        .about__quote cite {
+            font-style: normal;
+            font-size: 0.85rem;
+            color: var(--gold);
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+
+        /* ══════════════════════════════════════
+           CTA
+           ══════════════════════════════════════ */
+        .cta {
+            padding: 160px 0;
+            text-align: center;
+            background: var(--bg-dark);
+        }
+
+        .cta h2 {
+            font-size: 4.5rem;
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+
+        .cta p {
+            font-size: 1.1rem;
+            color: var(--cream-dim);
+            margin-bottom: 48px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ══════════════════════════════════════
+           FOOTER
+           ══════════════════════════════════════ */
+        .footer {
+            padding: 60px 0;
+            border-top: 1px solid var(--gold-dim);
+        }
+
+        .footer__inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .footer__logo {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            color: var(--cream);
+        }
+        .footer__logo span:first-child { font-weight: 800; }
+        .footer__logo span:last-child { font-weight: 300; }
+
+        .footer__links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .footer__links a {
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--cream-dim);
+            transition: color 0.3s;
+            font-weight: 400;
+        }
+
+        .footer__links a:hover { color: var(--gold); }
+
+        .footer__email {
+            font-size: 0.85rem;
+            color: var(--gold);
+            transition: opacity 0.3s;
+        }
+
+        .footer__email:hover { opacity: 0.7; }
+
+        /* ══════════════════════════════════════
+           RESPONSIVE
+           ══════════════════════════════════════ */
+        @media (max-width: 768px) {
+            .container, .container--wide, .divider { padding: 0 24px; }
+            .nav { padding: 0 24px; }
+            .nav__links { display: none; }
+            .nav__menu { display: flex; }
+
+            .hero__content { padding: 0 24px 80px; }
+            .hero__headline { font-size: 3.2rem; }
+            .hero__sub { font-size: 1rem; }
+
+            .section-pad { padding: 80px 0; }
+
+            .whatwedo { padding: 80px 0; }
+            .whatwedo__grid { grid-template-columns: 1fr; gap: 48px; }
+            .whatwedo__images { height: 400px; }
+            .whatwedo__img1 { width: 75%; height: 260px; }
+            .whatwedo__img2 { width: 60%; height: 220px; }
+            .whatwedo__text h2 { font-size: 2.4rem; }
+
+            .howitworks { padding: 80px 0; }
+            .howitworks__header h2 { font-size: 2.4rem; }
+            .steps { grid-template-columns: 1fr; gap: 48px; }
+            .step__number { font-size: 3.5rem; }
+
+            .portfolio { padding: 80px 0; }
+            .portfolio__header h2 { font-size: 2.4rem; }
+            .portfolio__grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+            }
+            .portfolio__item--large { grid-row: span 1; }
+            .portfolio__item img { height: 300px; }
+
+            .occasions { padding: 80px 0; }
+            .occasions__header h2 { font-size: 2.4rem; }
+            .occasions__grid { grid-template-columns: 1fr; }
+
+            .testimonials { padding: 80px 0; }
+            .testimonials__header h2 { font-size: 2.4rem; }
+            .testimonials__grid { grid-template-columns: 1fr; gap: 48px; }
+
+            .credentials { padding: 60px 0; }
+
+            .about { padding: 80px 0; }
+            .about__grid { grid-template-columns: 1fr; gap: 48px; }
+            .about__text h2 { font-size: 2.4rem; }
+            .about__quote { padding-left: 24px; }
+            .about__quote blockquote { font-size: 1.2rem; }
+
+            .cta { padding: 80px 0; }
+            .cta h2 { font-size: 2.8rem; }
+
+            .footer__inner { flex-direction: column; gap: 24px; text-align: center; }
+            .footer__links { flex-wrap: wrap; justify-content: center; gap: 20px; }
+        }
+
+        /* ── Fade-in animation ── */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ════════ NAV ════════ -->
+    <nav class="nav">
+        <a href="#" class="nav__logo">
+            <span>Story</span><span>Of</span>
+        </a>
+        <ul class="nav__links">
+            <li><a href="#whatwedo">What We Do</a></li>
+            <li><a href="#howitworks">How It Works</a></li>
+            <li><a href="#portfolio">Our Work</a></li>
+            <li><a href="#occasions">Occasions</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact" class="btn" style="padding: 8px 24px; font-size: 0.65rem;">Get in Touch</a></li>
+        </ul>
+        <div class="nav__menu" onclick="document.querySelector('.nav__links').classList.toggle('nav__links--open')">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- ════════ HERO ════════ -->
+    <section class="hero">
+        <video class="hero__video" autoplay muted loop playsinline poster="assets/studio/hero-poster.jpg">
+            <source src="https://video.wixstatic.com/video/c0bde0_6be8e3d2df524a89a562876f20bd24cb/720p/mp4/file.mp4" type="video/mp4">
+        </video>
+        <div class="hero__overlay"></div>
+        <div class="hero__content fade-in">
+            <h1 class="hero__headline">Your Story<br><em>Drawn to Life</em></h1>
+            <p class="hero__sub">Personalized animated films that celebrate the moments, people, and stories that matter most.</p>
+            <a href="#contact" class="btn">Begin Your Story</a>
+        </div>
+    </section>
+
+    <!-- ════════ DIVIDER ════════ -->
+    <div class="divider" style="padding-top: 0; padding-bottom: 0;">
+        <span>What We Do</span>
+    </div>
+
+    <!-- ════════ WHAT WE DO ════════ -->
+    <section id="whatwedo" class="whatwedo">
+        <div class="container">
+            <div class="whatwedo__grid">
+                <div class="whatwedo__images fade-in">
+                    <img class="whatwedo__img1" src="assets/studio/grandma.jpg" alt="Animated grandmother portrait">
+                    <img class="whatwedo__img2" src="assets/studio/bride-and-groom.png" alt="Animated bride and groom">
+                </div>
+                <div class="whatwedo__text fade-in">
+                    <div class="gold-line"></div>
+                    <h2>Stories Worth Telling</h2>
+                    <p>We create personalized animated films for life's most meaningful moments. From weddings and anniversaries to memorials and milestone birthdays, each film is a hand-crafted work of art.</p>
+                    <p>Our team of animators, illustrators, and storytellers work closely with you to transform your memories, photographs, and family lore into a cinematic experience that will be treasured for generations.</p>
+                    <a href="#howitworks" class="btn" style="margin-top: 32px;">See How It Works</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ DIVIDER ════════ -->
+    <div class="divider">
+        <span>How It Works</span>
+    </div>
+
+    <!-- ════════ HOW IT WORKS ════════ -->
+    <section id="howitworks" class="howitworks">
+        <div class="container">
+            <div class="howitworks__header fade-in">
+                <h2>Three Simple Steps</h2>
+            </div>
+            <div class="steps">
+                <div class="step fade-in">
+                    <div class="step__number">01</div>
+                    <img class="step__image" src="assets/studio/step-listen.jpg" alt="We listen to your story">
+                    <h3 class="step__title">We Listen to You</h3>
+                    <p class="step__desc">We begin with a deep conversation, learning about the people, moments, and emotions that define your story. Every detail matters.</p>
+                </div>
+                <div class="step fade-in" style="transition-delay: 0.15s;">
+                    <div class="step__number">02</div>
+                    <img class="step__image" src="assets/studio/step-create.jpeg" alt="We create your story">
+                    <h3 class="step__title">We Create Your Story</h3>
+                    <p class="step__desc">Our artists and animators bring your narrative to life through hand-crafted illustration, evocative music, and cinematic animation.</p>
+                </div>
+                <div class="step fade-in" style="transition-delay: 0.3s;">
+                    <div class="step__number">03</div>
+                    <img class="step__image" src="assets/studio/step-celebrate.jpeg" alt="You celebrate">
+                    <h3 class="step__title">You Celebrate</h3>
+                    <p class="step__desc">Screen your film at your event, share it with loved ones, and keep it as a timeless keepsake that grows more precious with the years.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ DIVIDER ════════ -->
+    <div class="divider">
+        <span>Our Work</span>
+    </div>
+
+    <!-- ════════ PORTFOLIO ════════ -->
+    <section id="portfolio" class="portfolio">
+        <div class="container">
+            <div class="portfolio__header fade-in">
+                <h2>Selected Films</h2>
+            </div>
+            <div class="portfolio__grid">
+                <!-- Large item -->
+                <div class="portfolio__item portfolio__item--large fade-in">
+                    <img src="assets/studio/portfolio-dov.png" alt="Dov — In memory of my father">
+                    <div class="portfolio__overlay">
+                        <div class="portfolio__play">
+                            <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
+                        </div>
+                        <h3 class="portfolio__title">Dov</h3>
+                        <p class="portfolio__desc">In memory of my father</p>
+                        <div class="portfolio__tags">
+                            <span class="portfolio__tag">Memorial</span>
+                            <span class="portfolio__tag">Animation</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Small item top-right -->
+                <div class="portfolio__item fade-in" style="transition-delay: 0.1s;">
+                    <img src="assets/studio/portfolio-ola-tim.jpg" alt="Ola & Tim" style="height: 100%; min-height: 280px;">
+                    <div class="portfolio__overlay">
+                        <div class="portfolio__play">
+                            <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
+                        </div>
+                        <h3 class="portfolio__title">Ola &amp; Tim</h3>
+                        <p class="portfolio__desc">Still not a wedding</p>
+                        <div class="portfolio__tags">
+                            <span class="portfolio__tag">Anniversary</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- Small item bottom-right -->
+                <div class="portfolio__item fade-in" style="transition-delay: 0.2s;">
+                    <img src="assets/studio/portfolio-german-nurse.png" alt="The German Nurse" style="height: 100%; min-height: 280px;">
+                    <div class="portfolio__overlay">
+                        <div class="portfolio__play">
+                            <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
+                        </div>
+                        <h3 class="portfolio__title">The German Nurse</h3>
+                        <p class="portfolio__desc">Elka Burnstein</p>
+                        <div class="portfolio__tags">
+                            <span class="portfolio__tag">Memorial</span>
+                            <span class="portfolio__tag">Documentary</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Second row: reversed stagger -->
+            <div class="portfolio__grid" style="grid-template-columns: 1fr 1.4fr; margin-top: 32px;">
+                <div class="portfolio__item fade-in">
+                    <img src="assets/studio/portfolio-zippora.jpg" alt="Red Fox — Zippora Feivlewitz" style="height: 400px;">
+                    <div class="portfolio__overlay">
+                        <div class="portfolio__play">
+                            <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
+                        </div>
+                        <h3 class="portfolio__title">Red Fox</h3>
+                        <p class="portfolio__desc">Zippora Feivlewitz</p>
+                        <div class="portfolio__tags">
+                            <span class="portfolio__tag">Legacy</span>
+                            <span class="portfolio__tag">Animation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ DIVIDER ════════ -->
+    <div class="divider">
+        <span>Occasions</span>
+    </div>
+
+    <!-- ════════ OCCASIONS ════════ -->
+    <section id="occasions" class="occasions">
+        <div class="container">
+            <div class="occasions__header fade-in">
+                <h2>Every Moment Matters</h2>
+            </div>
+            <div class="occasions__grid">
+                <div class="occasion fade-in">
+                    <h3 class="occasion__title">Weddings</h3>
+                    <span class="occasion__sub">Love stories, animated</span>
+                </div>
+                <div class="occasion fade-in" style="transition-delay: 0.05s;">
+                    <h3 class="occasion__title">Anniversaries</h3>
+                    <span class="occasion__sub">Celebrating years together</span>
+                </div>
+                <div class="occasion fade-in" style="transition-delay: 0.1s;">
+                    <h3 class="occasion__title">A Special Birthday</h3>
+                    <span class="occasion__sub">A life worth celebrating</span>
+                </div>
+                <div class="occasion fade-in" style="transition-delay: 0.15s;">
+                    <h3 class="occasion__title">Coming of Age</h3>
+                    <span class="occasion__sub">The journey begins</span>
+                </div>
+                <div class="occasion fade-in" style="transition-delay: 0.2s;">
+                    <h3 class="occasion__title">A New Baby</h3>
+                    <span class="occasion__sub">Welcome to the world</span>
+                </div>
+                <div class="occasion fade-in" style="transition-delay: 0.25s;">
+                    <h3 class="occasion__title">In Memory Of</h3>
+                    <span class="occasion__sub">Preserving a legacy</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ DIVIDER ════════ -->
+    <div class="divider">
+        <span>Testimonials</span>
+    </div>
+
+    <!-- ════════ TESTIMONIALS ════════ -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="testimonials__header fade-in">
+                <h2>In Their Words</h2>
+            </div>
+            <div class="testimonials__grid">
+                <div class="testimonial fade-in">
+                    <p class="testimonial__quote">My 90 years old mother, WWII survivor, was animated by StoryOf. This memoir preserves her legacy, and inspires generations of young and adult audiences.</p>
+                    <p class="testimonial__author">Dina Smat</p>
+                </div>
+                <div class="testimonial fade-in" style="transition-delay: 0.1s;">
+                    <p class="testimonial__quote">I had no idea what treasured memories my mother and uncle held of my father. We feel so much closer to each other now, and we have an amazing film as a tribute of his memory.</p>
+                    <p class="testimonial__author">Merav Kaplan</p>
+                </div>
+                <div class="testimonial fade-in" style="transition-delay: 0.2s;">
+                    <p class="testimonial__quote">The StoryOf film we received as a 15th anniversary gift is by far our favorite. When it was screened at our event everyone enjoyed it.</p>
+                    <p class="testimonial__author">Ola &amp; Tim</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ DIVIDER ════════ -->
+    <div class="divider">
+        <span>Credentials</span>
+    </div>
+
+    <!-- ════════ CREDENTIALS ════════ -->
+    <section class="credentials">
+        <div class="container" style="text-align: center;">
+            <img class="credentials__strip" src="assets/studio/credentials-strip.png" alt="NFB, Asylum Arts, Lincoln Center, Dan David Prize, European Cultural Foundation, Tel Aviv Museum">
+        </div>
+    </section>
+
+    <!-- ════════ DIVIDER ════════ -->
+    <div class="divider">
+        <span>About</span>
+    </div>
+
+    <!-- ════════ ABOUT ════════ -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about__grid">
+                <div class="about__text fade-in">
+                    <h2>About StoryOf</h2>
+                    <p>We bring personal journeys to life through cutting-edge animation techniques. Our team celebrates the magic in everyday experiences, revives moments lost to time, and strengthens the bonds that tie us all together.</p>
+                    <p>With over 15 years of experience in the international creative industry, we've crafted award-winning animated stories that have captivated global audiences.</p>
+                </div>
+                <div class="about__quote fade-in" style="transition-delay: 0.15s;">
+                    <blockquote>I founded StoryOf to bring people together through creativity. Our stories connect us to our roots and to one another, and make this world a bit brighter. When we're creating a film, we don't just save the memories: we're building bridges between hearts.</blockquote>
+                    <cite>Daniella Koffler, Founder &amp; CEO</cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ════════ DIVIDER ════════ -->
+    <div class="divider">
+        <span>Get in Touch</span>
+    </div>
+
+    <!-- ════════ CTA ════════ -->
+    <section id="contact" class="cta">
+        <div class="container">
+            <h2 class="fade-in">Ready to Begin?</h2>
+            <p class="fade-in" style="transition-delay: 0.1s;">Every great film starts with a conversation. Tell us about the story you want to bring to life.</p>
+            <a href="mailto:Hello@storyof.co" class="btn btn--filled fade-in" style="transition-delay: 0.2s;">Hello@storyof.co</a>
+        </div>
+    </section>
+
+    <!-- ════════ FOOTER ════════ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <a href="#" class="footer__logo">
+                    <span>Story</span><span>Of</span>
+                </a>
+                <ul class="footer__links">
+                    <li><a href="#whatwedo">What We Do</a></li>
+                    <li><a href="#portfolio">Our Work</a></li>
+                    <li><a href="#occasions">Occasions</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+                <a href="mailto:Hello@storyof.co" class="footer__email">Hello@storyof.co</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ── Intersection Observer for fade-in ── -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+            document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+            // Make hero content visible immediately
+            setTimeout(() => {
+                document.querySelector('.hero__content')?.classList.add('visible');
+            }, 300);
+        });
+    </script>
+
+</body>
+</html>
