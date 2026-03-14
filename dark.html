@@ -216,9 +216,7 @@
   .scattered-photos .photo-item img {
     display: block;
     width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: var(--warm-bg);
+    height: auto;
   }
 
   .scattered-photos .photo-item .caption {
@@ -238,12 +236,12 @@
   }
   .scattered-photos .photo-item:hover .caption { opacity: 1; }
 
-  .scattered-photos .photo-item:nth-child(1) { width: 300px; height: 190px; top: 0; left: 3%; transform: rotate(-5deg); z-index: 3; }
-  .scattered-photos .photo-item:nth-child(2) { width: 270px; height: 170px; top: 30px; left: 38%; transform: rotate(3deg); z-index: 5; }
-  .scattered-photos .photo-item:nth-child(3) { width: 290px; height: 185px; top: 10px; right: 3%; transform: rotate(-2deg); z-index: 4; }
-  .scattered-photos .photo-item:nth-child(4) { width: 280px; height: 175px; top: 280px; left: 8%; transform: rotate(4deg); z-index: 6; }
-  .scattered-photos .photo-item:nth-child(5) { width: 260px; height: 165px; top: 320px; left: 42%; transform: rotate(-6deg); z-index: 2; }
-  .scattered-photos .photo-item:nth-child(6) { width: 300px; height: 190px; top: 290px; right: 5%; transform: rotate(2deg); z-index: 7; }
+  .scattered-photos .photo-item:nth-child(1) { width: 300px; top: 0; left: 3%; transform: rotate(-5deg); z-index: 3; }
+  .scattered-photos .photo-item:nth-child(2) { width: 270px; top: 30px; left: 38%; transform: rotate(3deg); z-index: 5; }
+  .scattered-photos .photo-item:nth-child(3) { width: 290px; top: 10px; right: 3%; transform: rotate(-2deg); z-index: 4; }
+  .scattered-photos .photo-item:nth-child(4) { width: 280px; top: 280px; left: 8%; transform: rotate(4deg); z-index: 6; }
+  .scattered-photos .photo-item:nth-child(5) { width: 260px; top: 320px; left: 42%; transform: rotate(-6deg); z-index: 2; }
+  .scattered-photos .photo-item:nth-child(6) { width: 300px; top: 290px; right: 5%; transform: rotate(2deg); z-index: 7; }
 
   /* Story images scattered */
   .story-scattered {
@@ -270,9 +268,7 @@
   .story-scattered .photo-item img {
     display: block;
     width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: var(--warm-bg);
+    height: auto;
   }
   .story-scattered .photo-item .caption {
     position: absolute;
@@ -291,9 +287,9 @@
   }
   .story-scattered .photo-item:hover .caption { opacity: 1; }
 
-  .story-scattered.pair .photo-item:nth-child(1) { width: 52%; height: 300px; top: 0; left: 0; transform: rotate(-3deg); z-index: 3; }
-  .story-scattered.pair .photo-item:nth-child(2) { width: 52%; height: 300px; top: 40px; right: 0; left: auto; transform: rotate(2.5deg); z-index: 4; }
-  .story-scattered.single .photo-item:nth-child(1) { width: 75%; height: 340px; top: 0; left: 12%; transform: rotate(-1.5deg); z-index: 3; }
+  .story-scattered.pair .photo-item:nth-child(1) { width: 52%; top: 0; left: 0; transform: rotate(-3deg); z-index: 3; }
+  .story-scattered.pair .photo-item:nth-child(2) { width: 52%; top: 40px; right: 0; left: auto; transform: rotate(2.5deg); z-index: 4; }
+  .story-scattered.single .photo-item:nth-child(1) { width: 75%; top: 0; left: 12%; transform: rotate(-1.5deg); z-index: 3; }
 
   /* === GALLERY SCATTERED === */
   .gallery-scattered {
@@ -321,9 +317,7 @@
   .gallery-scattered .photo-item img {
     display: block;
     width: 100%;
-    height: 100%;
-    object-fit: contain;
-    background: var(--warm-bg);
+    height: auto;
   }
   .gallery-scattered .photo-item .caption {
     position: absolute;
@@ -342,16 +336,16 @@
   }
   .gallery-scattered .photo-item:hover .caption { opacity: 1; }
 
-  .gallery-scattered .photo-item:nth-child(1)  { width: 220px; height: 220px; top: 0;    left: 2%;   transform: rotate(-4deg); z-index: 3; }
-  .gallery-scattered .photo-item:nth-child(2)  { width: 190px; height: 250px; top: 10px;  left: 28%;  transform: rotate(3deg); z-index: 5; }
-  .gallery-scattered .photo-item:nth-child(3)  { width: 210px; height: 210px; top: 0;    left: 52%;  transform: rotate(-2deg); z-index: 4; }
-  .gallery-scattered .photo-item:nth-child(4)  { width: 230px; height: 190px; top: 20px;  right: 2%;  transform: rotate(5deg); z-index: 2; }
-  .gallery-scattered .photo-item:nth-child(5)  { width: 210px; height: 260px; top: 320px; left: 5%;   transform: rotate(2deg); z-index: 6; }
-  .gallery-scattered .photo-item:nth-child(6)  { width: 200px; height: 200px; top: 350px; left: 30%;  transform: rotate(-5deg); z-index: 7; }
-  .gallery-scattered .photo-item:nth-child(7)  { width: 220px; height: 220px; top: 330px; left: 55%;  transform: rotate(3.5deg); z-index: 3; }
-  .gallery-scattered .photo-item:nth-child(8)  { width: 190px; height: 240px; top: 310px; right: 3%;  transform: rotate(-3deg); z-index: 8; }
-  .gallery-scattered .photo-item:nth-child(9)  { width: 210px; height: 190px; top: 650px; left: 12%;  transform: rotate(4deg); z-index: 4; }
-  .gallery-scattered .photo-item:nth-child(10) { width: 240px; height: 220px; top: 630px; left: 48%;  transform: rotate(-2.5deg); z-index: 5; }
+  .gallery-scattered .photo-item:nth-child(1)  { width: 220px; top: 0;    left: 2%;   transform: rotate(-4deg); z-index: 3; }
+  .gallery-scattered .photo-item:nth-child(2)  { width: 190px; top: 10px;  left: 28%;  transform: rotate(3deg); z-index: 5; }
+  .gallery-scattered .photo-item:nth-child(3)  { width: 210px; top: 0;    left: 52%;  transform: rotate(-2deg); z-index: 4; }
+  .gallery-scattered .photo-item:nth-child(4)  { width: 230px; top: 20px;  right: 2%;  transform: rotate(5deg); z-index: 2; }
+  .gallery-scattered .photo-item:nth-child(5)  { width: 210px; top: 320px; left: 5%;   transform: rotate(2deg); z-index: 6; }
+  .gallery-scattered .photo-item:nth-child(6)  { width: 200px; top: 350px; left: 30%;  transform: rotate(-5deg); z-index: 7; }
+  .gallery-scattered .photo-item:nth-child(7)  { width: 220px; top: 330px; left: 55%;  transform: rotate(3.5deg); z-index: 3; }
+  .gallery-scattered .photo-item:nth-child(8)  { width: 190px; top: 310px; right: 3%;  transform: rotate(-3deg); z-index: 8; }
+  .gallery-scattered .photo-item:nth-child(9)  { width: 210px; top: 650px; left: 12%;  transform: rotate(4deg); z-index: 4; }
+  .gallery-scattered .photo-item:nth-child(10) { width: 240px; top: 630px; left: 48%;  transform: rotate(-2.5deg); z-index: 5; }
 
   /* === SECTION STYLES === */
   .section-label {
@@ -608,7 +602,6 @@
       top: auto !important;
       left: auto !important;
       right: auto !important;
-      aspect-ratio: 4/3;
       scroll-snap-align: center;
       transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease, z-index 0s !important;
       opacity: 0.6;
