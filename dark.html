@@ -29,16 +29,16 @@
   /* === STORYOF LOGO TOP-LEFT === */
   .storyof-logo {
     position: fixed;
-    top: 0;
+    top: 50px;
     left: 0;
     z-index: 100;
     text-decoration: none;
     font-family: 'Inter', sans-serif;
-    font-size: 1.1rem;
+    font-size: 1.65rem;
     color: var(--cream);
     background: rgba(0,0,0,0.7);
-    padding: 0.6rem 1.2rem;
-    border-radius: 0 0 8px 0;
+    padding: 0.8rem 1.6rem;
+    border-radius: 0 8px 8px 0;
     backdrop-filter: blur(8px);
     transition: opacity 0.3s;
   }
@@ -122,10 +122,9 @@
     height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
     text-align: left;
-    padding-top: 15vh;
     padding-left: 10%;
     overflow: hidden;
   }
@@ -154,16 +153,19 @@
     margin-bottom: 0.5rem;
     position: relative;
     z-index: 2;
+    text-shadow: 0 4px 16px rgba(0,0,0,0.2);
   }
 
   .hero .subtitle {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     color: var(--cream-soft);
     font-weight: 300;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
     margin-bottom: 3rem;
     position: relative;
     z-index: 2;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.7);
   }
 
   .cta-button {
@@ -226,9 +228,10 @@
     padding: 1.5rem 1rem 0.8rem;
     background: linear-gradient(transparent, rgba(0,0,0,0.85));
     color: var(--cream);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 300;
-    letter-spacing: 0.5px;
+    font-style: italic;
+    letter-spacing: 0.3px;
     opacity: 0;
     transition: opacity 0.4s;
   }
@@ -277,8 +280,10 @@
     padding: 1.5rem 1rem 0.8rem;
     background: linear-gradient(transparent, rgba(0,0,0,0.85));
     color: var(--cream);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.3px;
     opacity: 0;
     transition: opacity 0.4s;
   }
@@ -325,8 +330,10 @@
     padding: 1.5rem 1rem 0.8rem;
     background: linear-gradient(transparent, rgba(0,0,0,0.85));
     color: var(--cream);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.3px;
     opacity: 0;
     transition: opacity 0.4s;
   }
@@ -345,16 +352,17 @@
 
   /* === SECTION STYLES === */
   .section-label {
-    font-size: 0.7rem;
-    letter-spacing: 4px;
+    font-size: 0.65rem;
+    letter-spacing: 5px;
     text-transform: uppercase;
     color: var(--gold);
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    font-weight: 500;
   }
 
   .story-section {
-    max-width: 800px;
+    max-width: 720px;
     margin: 0 auto;
     padding: 6rem 2rem;
     position: relative;
@@ -375,23 +383,57 @@
     font-size: clamp(2rem, 5vw, 3rem);
     color: var(--cream);
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 4rem;
+    letter-spacing: 0.02em;
   }
 
-  .story-block { margin-bottom: 4rem; }
+  .story-block { margin-bottom: 4.5rem; }
 
   .story-block p {
     font-size: 1.05rem;
-    line-height: 1.9;
+    line-height: 1.85;
     color: var(--text-dim);
     font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  .story-block p + p {
+    margin-top: 1.2rem;
   }
 
   .story-block .chapter-title {
     font-family: 'DM Serif Display', serif;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    color: var(--cream);
+    margin-bottom: 1.4rem;
+    letter-spacing: 0.02em;
+    position: relative;
+    padding-left: 1.6rem;
+  }
+
+  .story-block .chapter-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0.7rem;
+    height: 2px;
+    background: var(--gold);
+  }
+
+  /* Closing / summary paragraph — italic pull-quote style */
+  .story-block.closing p {
+    font-style: italic;
     color: var(--cream-soft);
-    margin-bottom: 1rem;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    border-top: 1px solid rgba(200,164,92,0.15);
+    padding-top: 2rem;
   }
 
   /* === DIVIDER === */
@@ -418,6 +460,7 @@
     color: var(--cream);
     text-align: center;
     margin-bottom: 3rem;
+    letter-spacing: 0.02em;
   }
 
   /* === MEDIA GALLERY === */
@@ -433,6 +476,7 @@
     color: var(--cream);
     text-align: center;
     margin-bottom: 1rem;
+    letter-spacing: 0.02em;
   }
 
   .media-section .section-desc {
@@ -440,6 +484,8 @@
     color: var(--text-dim);
     margin-bottom: 3rem;
     font-weight: 300;
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
   }
 
   .media-grid {
@@ -477,21 +523,21 @@
     font-size: 1.2rem;
   }
 
-  .media-card .media-info { padding: 1.2rem; }
-  .media-card .media-info h3 { font-family: 'DM Serif Display', serif; font-size: 1.1rem; color: var(--cream); margin-bottom: 0.3rem; }
-  .media-card .media-info p { font-size: 0.85rem; color: var(--text-dim); font-weight: 300; }
+  .media-card .media-info { padding: 1.2rem 1.4rem; }
+  .media-card .media-info h3 { font-family: 'DM Serif Display', serif; font-size: 1.15rem; color: var(--cream); margin-bottom: 0.4rem; letter-spacing: 0.01em; }
+  .media-card .media-info p { font-size: 0.85rem; color: var(--text-dim); font-weight: 300; line-height: 1.5; letter-spacing: 0.01em; }
 
   /* === FOOTER === */
   footer {
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
     text-align: center;
     border-top: 1px solid rgba(200,164,92,0.1);
     background: #1a1408;
   }
-  footer .footer-brand { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text-dim); margin-bottom: 0.5rem; }
+  footer .footer-brand { font-family: 'Inter', sans-serif; font-size: 1rem; color: var(--text-dim); margin-bottom: 0.5rem; letter-spacing: 0.05em; }
   footer .footer-brand strong { color: var(--cream); font-weight: 700; }
   footer .footer-brand span { font-weight: 300; }
-  footer .footer-sub { font-size: 0.8rem; color: rgba(184,168,138,0.5); font-weight: 300; }
+  footer .footer-sub { font-size: 0.75rem; color: rgba(184,168,138,0.4); font-weight: 300; letter-spacing: 0.5px; }
   footer a { color: inherit; text-decoration: none; }
   footer a:hover { opacity: 0.7; }
 
@@ -682,6 +728,236 @@
     }
   }
 
+  /* === TIMELINE === */
+  .timeline-section {
+    padding: 6rem 2rem;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .timeline-section h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: var(--cream);
+    text-align: center;
+    margin-bottom: 4rem;
+    letter-spacing: 0.02em;
+  }
+
+  .timeline-trail {
+    position: relative;
+    padding: 2rem 0;
+  }
+
+  /* SVG weaving trail */
+  .timeline-trail svg.trail-path {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .timeline-trail svg.trail-path path {
+    fill: none;
+    stroke: var(--gold);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 8 6;
+    opacity: 0.45;
+  }
+
+  .timeline-node {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    margin-bottom: 4rem;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .timeline-node.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* X marks the spot */
+  .timeline-node::before,
+  .timeline-node::after {
+    content: '';
+    position: absolute;
+    top: 1.6rem;
+    width: 18px;
+    height: 2px;
+    background: var(--gold);
+    z-index: 2;
+    opacity: 0.7;
+  }
+  .timeline-node::before {
+    transform: translateX(-50%) rotate(45deg);
+  }
+  .timeline-node::after {
+    transform: translateX(-50%) rotate(-45deg);
+  }
+
+  /* X positions match trail weave — set by JS via custom property */
+  .timeline-node::before,
+  .timeline-node::after {
+    left: var(--x-pos, 50%);
+  }
+
+  .timeline-text {
+    width: 42%;
+    padding: 0 0.8rem;
+  }
+
+  .timeline-text .tl-year {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+
+  .timeline-text .tl-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.3rem;
+    color: var(--cream);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0.01em;
+  }
+
+  .timeline-text .tl-desc {
+    font-size: 0.92rem;
+    line-height: 1.7;
+    color: var(--text-dim);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  .timeline-illus {
+    width: 30%;
+    padding: 0 1rem;
+  }
+
+  .timeline-illus .illus-placeholder {
+    width: 140px;
+    height: 105px;
+    border: 1px dashed rgba(200,164,92,0.2);
+    border-radius: 3px;
+    background: rgba(200,164,92,0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  }
+
+  .timeline-illus .illus-placeholder span {
+    font-size: 0.6rem;
+    color: rgba(200,164,92,0.2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* Subtle varied rotations */
+  .timeline-node:nth-child(1) .illus-placeholder { transform: rotate(-3deg); }
+  .timeline-node:nth-child(2) .illus-placeholder { transform: rotate(4deg); }
+  .timeline-node:nth-child(3) .illus-placeholder { transform: rotate(-5deg); }
+  .timeline-node:nth-child(4) .illus-placeholder { transform: rotate(2deg); }
+  .timeline-node:nth-child(5) .illus-placeholder { transform: rotate(-4deg); }
+  .timeline-node:nth-child(6) .illus-placeholder { transform: rotate(5deg); }
+  .timeline-node:nth-child(7) .illus-placeholder { transform: rotate(-2deg); }
+  .timeline-node:nth-child(8) .illus-placeholder { transform: rotate(3deg); }
+  .timeline-node:nth-child(9) .illus-placeholder { transform: rotate(-6deg); }
+  .timeline-node:nth-child(10) .illus-placeholder { transform: rotate(4deg); }
+  .timeline-node:nth-child(11) .illus-placeholder { transform: rotate(-3deg); }
+
+  /* Odd nodes: text left, illustration right */
+  .timeline-node:nth-child(odd) {
+    flex-direction: row;
+  }
+  .timeline-node:nth-child(odd) .timeline-text {
+    text-align: right;
+    margin-left: 0;
+    margin-right: auto;
+  }
+  .timeline-node:nth-child(odd) .timeline-illus {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  /* Even nodes: illustration left, text right */
+  .timeline-node:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+  .timeline-node:nth-child(even) .timeline-text {
+    text-align: left;
+    margin-right: 0;
+    margin-left: auto;
+  }
+  .timeline-node:nth-child(even) .timeline-illus {
+    margin-right: auto;
+    margin-left: 0;
+  }
+
+
+  /* Mobile timeline */
+  @media (max-width: 768px) {
+    .timeline-trail svg.trail-path {
+      display: none;
+    }
+
+    .timeline-trail::before {
+      content: '';
+      position: absolute;
+      left: 1.2rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, transparent, var(--gold) 4%, var(--gold) 96%, transparent);
+    }
+
+    .timeline-node {
+      flex-direction: column !important;
+      padding-left: 3rem;
+      margin-bottom: 3rem;
+    }
+
+    .timeline-node::before,
+    .timeline-node::after {
+      left: 1.2rem !important;
+      top: 0.3rem;
+      width: 12px;
+    }
+
+    .timeline-node::after {
+      display: none;
+    }
+
+    .timeline-text,
+    .timeline-illus {
+      width: 100%;
+      padding: 0;
+      text-align: left !important;
+    }
+
+    .timeline-text {
+      margin-bottom: 1rem;
+    }
+
+    .timeline-section {
+      padding: 3rem 1.5rem;
+    }
+
+    .timeline-section h2 {
+      margin-bottom: 2.5rem;
+    }
+  }
+
   /* Texture overlay */
   body::after {
     content: '';
@@ -704,7 +980,7 @@
   <div class="hero-overlay"></div>
   <div class="share-btn" title="Share this story"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
   <h1>Josh & Laura</h1>
-  <p class="subtitle">A Decade of Adventure</p>
+  <p class="subtitle">Ten Years of Choosing Each Other</p>
   <a href="#" class="cta-button">Watch the Film</a>
 </section>
 
@@ -712,12 +988,12 @@
 <section style="padding: 4rem 0;">
   <div class="section-label">Frames from the Film</div>
   <div class="scattered-photos">
-    <div class="photo-item"><img src="assets/film-art/Josh and Laura (42).png" alt="Film frame"><div class="caption">Together they climbed, roped side by side</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/film-art/Josh and Laura (43).png" alt="Film frame"><div class="caption">Laura's first solo summit at dawn</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/film-art/Josh and Laura (44).png" alt="Film frame"><div class="caption">Josh and his faithful companion on the trail</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/film-art/Josh and Laura (45).png" alt="Film frame"><div class="caption">The moment everything changed</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/film-art/Josh and Laura (46).png" alt="Film frame"><div class="caption">A river of light through the canyon of years</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/film-art/Josh and Laura (47).png" alt="Film frame"><div class="caption">New horizons, new adventures, same love</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/film-art/Josh and Laura (42).png" alt="Film frame"><div class="caption">Through every storm, side by side</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/film-art/Josh and Laura (43).png" alt="Film frame"><div class="caption">She never stopped chasing the horizon</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/film-art/Josh and Laura (44).png" alt="Film frame"><div class="caption">Thunder &mdash; the one who was there for all of it</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/film-art/Josh and Laura (45).png" alt="Film frame"><div class="caption">One last message before quitting the app</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/film-art/Josh and Laura (46).png" alt="Film frame"><div class="caption">Ten years of choosing each other</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/film-art/Josh and Laura (47).png" alt="Film frame"><div class="caption">Thunder, Rain, and Lightning &mdash; the storm family</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
   </div>
 </section>
 
@@ -729,7 +1005,8 @@
   <div class="story-block">
     <div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
     <div class="chapter-title">Love at First Swipe</div>
-    <p>It started the way so many modern love stories do &mdash; a swipe, a match, a spark. But what began on Tinder quickly leapt across borders and time zones, from quick messages to marathon Skype calls that stretched deep into the night. She was in Colombia, he was worlds away, but the distance only made the connection fiercer. There were no numbers between zero and ten &mdash; it was all or nothing from the start.</p>
+    <p>He had seven matches. She had a thousand. His first message got buried. About to quit the app, he sent one last round &mdash; a shot in the dark. She'd just cleared her inbox. His was the only one left. She clicked because of a sea lion kissing his cheek and a dog named Thunder on his back.</p>
+    <p>Six weeks of Skype before she'd agree to meet. Their first date was supposed to be TopGolf &mdash; six-hour wait &mdash; so they ended up at World of Beer. Neither of them drinks beer. Then karaoke. He sang. He pulled her up to dance. She hated all of it. After that night, they were together every day. Married five months later.</p>
   </div>
 
   <div class="story-scattered single">
@@ -738,29 +1015,153 @@
 
   <div class="story-block">
     <div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
-    <div class="chapter-title">Crossing Mountains</div>
-    <p>When they finally met in person, the world clicked into place. Laura brought the warmth of Colombia &mdash; her family, her roots, a father figure named Dr. Anthony who shaped the woman Josh fell in love with. Josh brought the pull of adventure &mdash; the open trail, the next peak, the dog at his side who'd become their first shared love. Together, they climbed. Literally and in every other way.</p>
+    <div class="chapter-title">Year One</div>
+    <p>His company shut down without warning. They were newly married, living with his sisters, eating chicken and potatoes every night. His father passed away at fifty-eight &mdash; they weren't close, but the loss left a quiet weight. The silver coins he left behind? Josh's siblings gave their share so Josh and Laura could hire an immigration lawyer.</p>
+    <p>By the end of that year, he'd found the best job of his life. All the way down, all the way up &mdash; in twelve months.</p>
   </div>
 
   <div class="story-scattered pair">
-    <div class="photo-item"><img src="assets/film-art/Josh and Laura (42).png" alt="Climbing together"><div class="caption">Every summit, earned together</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/film-art/Josh and Laura (43).png" alt="Laura hiking"><div class="caption">She never stopped chasing the horizon</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/film-art/Josh and Laura (42).png" alt="Through it all, together"><div class="caption">Through every storm, side by side</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/film-art/Josh and Laura (43).png" alt="Building a life"><div class="caption">The view is better when you've earned it</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
   </div>
 
   <div class="story-block">
     <div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
-    <div class="chapter-title">Building a Life</div>
-    <p>They built a home between cultures, between languages, between the familiar and the unknown. A beach wedding sealed what they already knew. Adventures stacked up &mdash; new cities, new challenges, costumes at parties, holidays with the dogs, quiet mornings with the cat. Ten years of choosing each other, every single day.</p>
+    <div class="chapter-title">Thunder, Rain &amp; Lightning</div>
+    <p>His dog was Thunder &mdash; red fur, golden eyes, his best friend since his brother left for Iraq. Her dog was Lluvia &mdash; Rain in Spanish &mdash; a German Shepherd she'd had since she was nine. Thunder and Rain. It felt like a sign before they even understood it.</p>
+    <p>They flew to Colombia so Josh could meet Laura's mom. He met Lluvia too &mdash; seventeen years old, near the end. Shortly after they came home, she was gone. When the grief softened, they got a fearless little cat and named him Rayo &mdash; Lightning. Thunder, Rain, and Lightning. The storm family.</p>
   </div>
 
   <div class="story-scattered single">
-    <div class="photo-item"><img src="assets/photos/IMG_6681.jpg" alt="Josh and Laura wedding"><div class="caption">The day the ocean held its breath</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/photos/IMG_6681.jpg" alt="Josh and Laura wedding"><div class="caption">An island in Colombia, five months after the first date</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
   </div>
 
   <div class="story-block">
     <div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
-    <div class="chapter-title">A Decade of Adventure</div>
-    <p>Now, ten years in, the view from the mountaintop is breathtaking. Not because the climbing stopped &mdash; but because they never stopped climbing together. This is their story. A story of swipes and Skype calls, of Colombia and new beginnings, of ropes and ridges, of a dog who was there for all of it. Ten years, drawn to life.</p>
+    <div class="chapter-title">The Highs and the Heartbreaks</div>
+    <p>A dream house with twenty-one-foot ceilings, sold to them by an eighty-year-old widow who wanted a couple like them to have it. Laura becoming a citizen the same month &mdash; celebrated with a rooftop party and a gloriously trashy American one with mullet wigs and flag onesies.</p>
+    <p>Then Thunder laid down and couldn't get up. River searched the house for him for days.</p>
+    <p>Laura failed the vet licensing exam &mdash; twice. One attempt left. A car accident. A tumor. On her third and final try, she passed. She became the doctor she'd crossed a continent to be.</p>
+  </div>
+
+  <div class="story-block">
+    <div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div>
+    <div class="chapter-title">Ten Years</div>
+    <p>Dr. Anthony &mdash; the vet who gave Laura her first American job, who believed in her first &mdash; got years he wasn't supposed to have. In year ten, he was gone. Laura barely made it to his room in time.</p>
+    <p>Now they're renewing their vows on a beach in Puerto Rico, with seven couples who became family along the way. The first time, they said these words in front of the people they came from. This time, it's the people they built a life beside.</p>
+  </div>
+
+  <div class="story-block closing">
+    <p>A last-chance message and a girl who almost didn't answer. Chicken-and-potato months and the best year ever. Thunder and Rain and Lightning. Ten years of choosing each other. Drawn to life.</p>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="timeline-section">
+  <div class="section-label">The Journey</div>
+  <h2>Ten Years</h2>
+
+  <div class="timeline-trail">
+
+    <div class="timeline-node">
+      <div class="timeline-text">
+        <div class="tl-year">How They Met</div>
+        <div class="tl-title">A Shot in the Dark</div>
+        <p class="tl-desc">One last message before quitting the app. A sea lion photo and a dog named Thunder. World of Beer, karaoke, and married five months later.</p>
+      </div>
+      <div class="timeline-illus"><div class="illus-placeholder"><span>Illustration</span></div></div>
+    </div>
+
+    <div class="timeline-node">
+      <div class="timeline-text">
+        <div class="tl-year">Year 1</div>
+        <div class="tl-title">All the Way Down, All the Way Up</div>
+        <p class="tl-desc">Job loss, chicken-and-potato months, his father gone at fifty-eight. Silver coins pooled by siblings to hire an immigration lawyer. By December &mdash; the best financial year of his life.</p>
+      </div>
+      <div class="timeline-illus"><div class="illus-placeholder"><span>Illustration</span></div></div>
+    </div>
+
+    <div class="timeline-node">
+      <div class="timeline-text">
+        <div class="tl-year">Year 2</div>
+        <div class="tl-title">Colombia</div>
+        <p class="tl-desc">Josh met Laura's mother Rocio, her friends, and Lluvia &mdash; the seventeen-year-old German Shepherd she'd had since she was nine. Shortly after they came home, Lluvia was gone. They got their first apartment together.</p>
+      </div>
+      <div class="timeline-illus"><div class="illus-placeholder"><span>Illustration</span></div></div>
+    </div>
+
+    <div class="timeline-node">
+      <div class="timeline-text">
+        <div class="tl-year">Year 3</div>
+        <div class="tl-title">Thunder, Rain &amp; Lightning</div>
+        <p class="tl-desc">A fearless kitten named Rayo &mdash; Lightning in Spanish. Small enough to fit in your hand, brave enough to jump from five feet onto concrete. The storm family was complete.</p>
+      </div>
+      <div class="timeline-illus"><div class="illus-placeholder"><span>Illustration</span></div></div>
+    </div>
+
+    <div class="timeline-node">
+      <div class="timeline-text">
+        <div class="tl-year">Year 4</div>
+        <div class="tl-title">Roots</div>
+        <p class="tl-desc">First house &mdash; imperfect, but theirs. Dr. Anthony diagnosed with a rare cancer, saved by his daughter Heidi's bone marrow. River arrived &mdash; a puppy to learn from Thunder while there was still time.</p>
+      </div>
+      <div class="timeline-illus"><div class="illus-placeholder"><span>Illustration</span></div></div>
+    </div>
+
+    <div class="timeline-node">
+      <div class="timeline-text">
+        <div class="tl-year">Year 5</div>
+        <div class="tl-title">The World Stopped</div>
+        <p class="tl-desc">COVID. Laura was traveling and barely made it back to the US on one of the last flights home.</p>
+      </div>
+      <div class="timeline-illus"><div class="illus-placeholder"><span>Illustration</span></div></div>
+    </div>
+
+    <div class="timeline-node">
+      <div class="timeline-text">
+        <div class="tl-year">Year 6</div>
+        <div class="tl-title">The Dream House</div>
+        <p class="tl-desc">Twenty-one-foot ceilings, sold to them by an eighty-year-old widow who wanted a couple like them to have it. Laura became a citizen the same month. Two parties: rooftop champagne and mullet wigs. Then Thunder laid down and couldn't get up.</p>
+      </div>
+      <div class="timeline-illus"><div class="illus-placeholder"><span>Illustration</span></div></div>
+    </div>
+
+    <div class="timeline-node">
+      <div class="timeline-text">
+        <div class="tl-year">Year 7</div>
+        <div class="tl-title">Six out of Seven</div>
+        <p class="tl-desc">Laura passed six of seven sections of the vet licensing exam. All seven required. A car accident in Missouri. A tumor discovered. They moved to Reno.</p>
+      </div>
+      <div class="timeline-illus"><div class="illus-placeholder"><span>Illustration</span></div></div>
+    </div>
+
+    <div class="timeline-node">
+      <div class="timeline-text">
+        <div class="tl-year">Year 8</div>
+        <div class="tl-title">One Attempt Left</div>
+        <p class="tl-desc">Failed again. One try remaining. Back to Florida. A specialist found through a friend looked once and said: &ldquo;This is why you have failed.&rdquo;</p>
+      </div>
+      <div class="timeline-illus"><div class="illus-placeholder"><span>Illustration</span></div></div>
+    </div>
+
+    <div class="timeline-node">
+      <div class="timeline-text">
+        <div class="tl-year">Year 9</div>
+        <div class="tl-title">Doctor</div>
+        <p class="tl-desc">She passed. First job as a licensed vet. Discovered she was made for emergency medicine. Joined the NERD program, moved to Texas, and took her first trip to Europe.</p>
+      </div>
+      <div class="timeline-illus"><div class="illus-placeholder"><span>Illustration</span></div></div>
+    </div>
+
+    <div class="timeline-node">
+      <div class="timeline-text">
+        <div class="tl-year">Year 10</div>
+        <div class="tl-title">Drawn to Life</div>
+        <p class="tl-desc">ER veterinarian. Dr. Anthony &mdash; gone, after years of bonus time. Vow renewal on a beach in Puerto Rico, with seven couples who became family along the way.</p>
+      </div>
+      <div class="timeline-illus"><div class="illus-placeholder"><span>Illustration</span></div></div>
+    </div>
+
   </div>
 </section>
 
@@ -773,16 +1174,16 @@
   <div class="section-label">Moments</div>
   <h2>Their World</h2>
   <div class="gallery-scattered">
-    <div class="photo-item"><img src="assets/photos/IMG_3699.JPG" alt="Josh and Laura"><div class="caption">Superheroes at heart, always</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/photos/IMG_0962.jpeg" alt="Josh and Laura"><div class="caption">Nap time, no questions asked</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/photos/IMG_2879.JPEG" alt="Josh and Laura"><div class="caption">The most festive reindeer on the block</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/photos/3384886315868757225.jpeg" alt="Josh and Laura"><div class="caption">A very distinguished gentleman</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/photos/IMG_3528.jpeg" alt="Josh and Laura"><div class="caption">Tastes like freedom</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/photos/IMG_7825.jpeg" alt="Josh and Laura"><div class="caption">Harry Pawter, ready for Hogwarts</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/photos/IMG_1380.jpeg" alt="Josh and Laura"><div class="caption">Two toys? Why not three?</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/photos/IMG_3699.JPG" alt="Josh and Laura"><div class="caption">Superheroes at heart &mdash; always have been</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/photos/IMG_0962.jpeg" alt="Josh and Laura"><div class="caption">Thunder earned this nap</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/photos/IMG_2879.JPEG" alt="Josh and Laura"><div class="caption">The storm family, holiday edition</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/photos/3384886315868757225.jpeg" alt="Josh and Laura"><div class="caption">Rayo &mdash; small, fearless, lightning in a bottle</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/photos/IMG_3528.jpeg" alt="Josh and Laura"><div class="caption">New experience number who-even-knows-anymore</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/photos/IMG_7825.jpeg" alt="Josh and Laura"><div class="caption">H-A-I-R-Y Pawter, ready for Hogwarts</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/photos/IMG_1380.jpeg" alt="Josh and Laura"><div class="caption">River, never without a toy &mdash; or three</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
     <div class="photo-item"><img src="assets/photos/IMG_7074.jpeg" alt="Josh and Laura"><div class="caption">Road trip crew, reporting for duty</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/photos/IMG_4443.JPEG" alt="Josh and Laura"><div class="caption">Ready for anything, ball in paw</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
-    <div class="photo-item"><img src="assets/photos/IMG_6681.jpg" alt="Josh and Laura"><div class="caption">Where it all became forever</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/photos/IMG_4443.JPEG" alt="Josh and Laura"><div class="caption">Everyone who said they didn't like dogs liked Thunder</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
+    <div class="photo-item"><img src="assets/photos/IMG_6681.jpg" alt="Josh and Laura"><div class="caption">An island in Colombia, five months after the first date</div><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div></div>
   </div>
 </section>
 
@@ -796,11 +1197,12 @@
   <h2>Voices & Moments</h2>
   <p class="section-desc">Interviews, archive footage, and excerpts from the film</p>
   <div class="media-grid">
-    <div class="media-card"><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><div class="media-thumb"><div class="play-icon">&#9654;</div></div><div class="media-info"><h3>Love at First Swipe</h3><p>A Tinder to Skype journey</p></div></div>
-    <div class="media-card"><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><div class="media-thumb"><div class="play-icon">&#9654;</div></div><div class="media-info"><h3>Meeting the Family</h3><p>Laura's family in Colombia</p></div></div>
-    <div class="media-card"><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><div class="media-thumb"><div class="play-icon">&#9654;</div></div><div class="media-info"><h3>Dr. Anthony</h3><p>A father figure to Laura</p></div></div>
-    <div class="media-card"><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><div class="media-thumb"><div class="play-icon">&#9654;</div></div><div class="media-info"><h3>No Numbers Between Zero and Ten</h3><p>All or nothing</p></div></div>
-    <div class="media-card"><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><div class="media-thumb"><div class="play-icon">&#9654;</div></div><div class="media-info"><h3>Celebrating 10 Years</h3><p>A decade together</p></div></div>
+    <div class="media-card"><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><div class="media-thumb"><div class="play-icon">&#9654;</div></div><div class="media-info"><h3>The Last Message</h3><p>How a buried Tinder match became a marriage in five months</p></div></div>
+    <div class="media-card"><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><div class="media-thumb"><div class="play-icon">&#9654;</div></div><div class="media-info"><h3>Year One</h3><p>Job loss, silver coins, and choosing to stay</p></div></div>
+    <div class="media-card"><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><div class="media-thumb"><div class="play-icon">&#9654;</div></div><div class="media-info"><h3>Thunder &amp; Lluvia</h3><p>The dogs who brought them together</p></div></div>
+    <div class="media-card"><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><div class="media-thumb"><div class="play-icon">&#9654;</div></div><div class="media-info"><h3>Dr. Anthony</h3><p>The man who gave Laura her American start</p></div></div>
+    <div class="media-card"><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><div class="media-thumb"><div class="play-icon">&#9654;</div></div><div class="media-info"><h3>Third Time&rsquo;s the Charm</h3><p>Laura&rsquo;s fight to become a veterinarian</p></div></div>
+    <div class="media-card"><div class="share-btn" title="Share"><svg viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg></div><div class="media-thumb"><div class="play-icon">&#9654;</div></div><div class="media-info"><h3>Ten Years Later</h3><p>Renewing vows on the beach in Puerto Rico</p></div></div>
   </div>
 </section>
 
@@ -844,6 +1246,103 @@
   // Run on load and resize
   initCarousels();
   window.addEventListener('resize', () => { initCarousels(); });
+})();
+
+// Timeline: fade-in on scroll + draw weaving trail
+(function() {
+  const trail = document.querySelector('.timeline-trail');
+  const nodes = document.querySelectorAll('.timeline-node');
+  if (!trail || !nodes.length) return;
+
+  // Fade-in observer
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('fade-in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  nodes.forEach(node => observer.observe(node));
+
+  // Seeded random for consistent weave across redraws
+  function seededRandom(seed) {
+    let s = seed;
+    return function() {
+      s = (s * 16807 + 0) % 2147483647;
+      return (s - 1) / 2147483646;
+    };
+  }
+  const rand = seededRandom(42);
+  // Pre-generate random offsets per node so they stay stable
+  const randomOffsets = Array.from({ length: nodes.length }, () => ({
+    xJitter: (rand() - 0.5) * 0.06,  // ±3% of width randomness
+    yJitter: (rand() - 0.5) * 20     // ±10px vertical jitter
+  }));
+
+  // Draw weaving SVG trail
+  function drawTrail() {
+    const existing = trail.querySelector('svg.trail-path');
+    if (existing) existing.remove();
+
+    const trailRect = trail.getBoundingClientRect();
+    const rem = parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const centerX = trailRect.width / 2;
+    const points = [];
+
+    nodes.forEach((node, i) => {
+      const nodeRect = node.getBoundingClientRect();
+      const dotY = nodeRect.top - trailRect.top + rem * 1.6 + randomOffsets[i].yJitter;
+
+      // Alternate sides with random variation in weave width
+      const baseWeave = trailRect.width * (0.04 + Math.abs(randomOffsets[i].xJitter));
+      const isOdd = i % 2 === 0;
+      const dotX = isOdd
+        ? centerX + baseWeave
+        : centerX - baseWeave;
+
+      points.push({ x: dotX, y: dotY });
+
+      // Set CSS custom property so X marks line up
+      const pct = (dotX / trailRect.width) * 100;
+      node.style.setProperty('--x-pos', pct + '%');
+    });
+
+    // Build path with varied control points for organic feel
+    let d = `M ${points[0].x} ${points[0].y - 50}`;
+    d += ` Q ${points[0].x + (rand() - 0.5) * 30} ${points[0].y - 20}, ${points[0].x} ${points[0].y}`;
+
+    for (let i = 0; i < points.length - 1; i++) {
+      const curr = points[i];
+      const next = points[i + 1];
+      const dy = next.y - curr.y;
+      // Randomize control point heights for organic curves
+      const cp1y = curr.y + dy * (0.3 + rand() * 0.2);
+      const cp2y = curr.y + dy * (0.55 + rand() * 0.2);
+      // Add slight x wander to control points
+      const cp1x = curr.x + (rand() - 0.5) * 20;
+      const cp2x = next.x + (rand() - 0.5) * 20;
+      d += ` C ${cp1x} ${cp1y}, ${cp2x} ${cp2y}, ${next.x} ${next.y}`;
+    }
+
+    const last = points[points.length - 1];
+    d += ` Q ${last.x + (rand() - 0.5) * 30} ${last.y + 20}, ${last.x} ${last.y + 50}`;
+
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.classList.add('trail-path');
+    svg.setAttribute('width', trailRect.width);
+    svg.setAttribute('height', trailRect.height);
+
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', d);
+    svg.appendChild(path);
+
+    trail.insertBefore(svg, trail.firstChild);
+  }
+
+  // Draw after layout settles
+  setTimeout(drawTrail, 200);
+  window.addEventListener('resize', () => { setTimeout(drawTrail, 100); });
 })();
 </script>
 </body>
