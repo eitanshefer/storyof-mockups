@@ -247,7 +247,7 @@
   .story-scattered {
     position: relative;
     width: 100%;
-    min-height: 380px;
+    min-height: 420px;
     margin: 2rem 0 3rem;
   }
 
@@ -289,8 +289,8 @@
 
   .story-scattered.pair .photo-item:nth-child(1) { width: 52%; top: 0; left: 0; transform: rotate(-3deg); z-index: 3; }
   .story-scattered.pair .photo-item:nth-child(2) { width: 52%; top: 40px; right: 0; left: auto; transform: rotate(2.5deg); z-index: 4; }
-  .story-scattered.single .photo-item:nth-child(1) { width: 75%; top: 0; left: 12%; transform: rotate(-1.5deg); z-index: 3; overflow: hidden; }
-  .story-scattered.single .photo-item:nth-child(1) img { max-height: 400px; width: auto; margin: 0 auto; }
+  .story-scattered.single .photo-item:nth-child(1) { width: auto; max-width: 75%; top: 0; left: 50%; transform: translateX(-50%) rotate(-1.5deg); z-index: 3; }
+  .story-scattered.single .photo-item:nth-child(1) img { max-height: 400px; width: auto; display: block; }
 
   /* === GALLERY SCATTERED === */
   .gallery-scattered {
