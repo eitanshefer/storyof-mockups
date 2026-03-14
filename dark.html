@@ -289,7 +289,8 @@
 
   .story-scattered.pair .photo-item:nth-child(1) { width: 52%; top: 0; left: 0; transform: rotate(-3deg); z-index: 3; }
   .story-scattered.pair .photo-item:nth-child(2) { width: 52%; top: 40px; right: 0; left: auto; transform: rotate(2.5deg); z-index: 4; }
-  .story-scattered.single .photo-item:nth-child(1) { width: 75%; top: 0; left: 12%; transform: rotate(-1.5deg); z-index: 3; }
+  .story-scattered.single .photo-item:nth-child(1) { width: 75%; max-height: 400px; top: 0; left: 12%; transform: rotate(-1.5deg); z-index: 3; }
+  .story-scattered.single .photo-item:nth-child(1) img { max-height: 400px; object-fit: contain; }
 
   /* === GALLERY SCATTERED === */
   .gallery-scattered {
